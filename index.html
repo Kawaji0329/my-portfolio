@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ポートフォリオ | 河路</title>
+  <link rel="stylesheet" href="portfolio.css">
+</head>
+
+<body>
+  <header class="header">
+    <h1 class="header__logo">ポートフォリオ</h1>
+    <nav  class="header__nav">
+      <ul class="header__list">
+        <li class="header__item"><a href="#about" class="header__nav-link">プロフィール</a></li>
+        <li class="header__item"><a href="#works" class="header__nav-link">制作実績</a></li>
+        <li class="header__item"><a href="#skills" class="header__nav-link">スキル</a></li>
+        <li class="header__item"><a href="#contact" class="header__nav-link">お問い合わせ</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="main-visual">
+      <h2 class="main-visual__title">やさしい雰囲気のWebデザインを</h2>
+      <p class="main-visual__lead">シンプルで見やすい、心地よいサイトを作ります。</p>
+    </section>
+
+    <section id="about" class="about">
+      <h2 class="about__title">プロフィール</h2>
+      <p class="about__message">
+        はじめまして。河路と申します。<br>現在、会社勤務の傍ら、HTML・CSS・JavaScriptを学習中です。<br>
+        シンプルでナチュラルなデザインを得意としており、<br>見る人に心地よい印象を与えるサイト作りを目指しています。<br>
+      </p>
+    </section>
+
+    <section id="works" class="works">
+      <div class="works__container">
+        <h2 class="works__title">制作実績</h2>
+        <div class="works__gallery">
+          <div class="works__item">
+            <a href="HP1_ﾅﾁｭﾗﾙｶﾌｪ/index.html" target="_blank" class="works__link">
+              <img src="portfolio_images/works1.jpg" alt="カフェ紹介サイト" class="works__image">
+              <h3 class="works__item-title">カフェ紹介サイト</h3>
+              <p class="works__description">
+                ナチュラルで落ち着いた雰囲気の<br>カフェ紹介ページです。
+              </p>
+            </a>
+            <button class="accordion__title">詳細を表示</button>
+            <div class="accordion__content">
+              <p class="accordion__content-text">
+                使用技術：HTML / CSS /<br><br>
+                BEM記法を用いて構造的にコーディングしました。<br>
+                レスポンシブ対応も実装し、<br>
+                PC・スマホどちらでも快適に閲覧できます。
+              </p>
+            </div>
+          </div>
+
+          <div class="works__item">
+            <a href="HP2_ZakkaPOP/index.html" target="_blank" class="works__link">
+              <img src="portfolio_images/works2.jpg" alt="雑貨店紹介サイト" class="works__image">
+              <h3 class="works__item-title">雑貨店紹介サイト</h3>
+              <p class="works__description">
+                ポップで可愛い雰囲気の<br>雑貨店紹介ページです。
+              </p>
+            </a>
+            <button class="accordion__title">詳細を表示</button>
+            <div class="accordion__content">
+              <p class="accordion__content-text">
+                使用技術：HTML / CSS / JavaScript<br><br>
+                BEM記法でコーディングし、レスポンシブ対応も実装済。<br>
+                基本的なアニメーションも実装しました。
+              </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="skills" class="skills">
+      <h2 class="skills__title">スキル</h2>
+      <ul class="skills__list">
+        <li class="skills__item">HTML / CSS（BEM設計、Flexbox など）</li>
+        <li class="skills__item">JavaScript（イベント、モーダル、アニメーション）</li>
+        <li class="skills__item">Git / GitHub</li>
+      </ul>
+    </section>
+
+    <section id="contact" class="contact">
+      <div class="contact__container">
+        <h2 class="contact__title">お問い合わせ</h2>
+        <p class="contact__description">お仕事のご依頼やご相談など、お気軽にご連絡ください。</p>
+        <p class="contact__description"><a href="mailto:yourname@example.com">justlikeagentlebreeze720@gmail.com</a></p>
+      </div>
+      <!-- フォーム追加 -->
+      <form id="contactForm" class="contact__form">
+        <div class="contact__form-group">
+          <label for="name" class="contact__label">お名前</label><br>
+          <input type="text" id="name" name="name" class="contact__input">
+          <p class="contact__error" id="nameError"></p>
+        </div>
+        <div class="contact__form-group">
+          <label for="email" class="contact__label">メールアドレス</label><br>
+          <input type="email" id="email" name="_replyto" class="contact__input">
+          <p class="contact__error" id="emailError"></p>
+        </div>
+        <div class="contact__form-group">
+          <label for="message" class="contact__label">メッセージ</label><br>
+          <textarea id="message" name="message" rows="5" class="contact__input" ></textarea>
+          <p class="contact__error" id="messageError"></p>
+        </div>
+        <button type="submit" class="contact__button">送信</button>
+      </form>
+      <p id="successMessage" class="contact__success"></p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p class="footer__copyright">&copy; 2025 河路</p>
+  </footer>
+  <script src="portfolio.js"></script>
+</body>
+
+</html>
