@@ -1,0 +1,333 @@
+/* 共通リセット */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'M PLUS Rounded 1c', sans-serif; /* ポップなGoogleフォント */
+    background-color: #fff8f0;
+    color: #333;
+}
+
+/* ヘッダー */
+header {
+  background-color: #ffccde;
+  padding: 20px;
+  text-align: center;
+  border-bottom: 3px solid #ff99bb;
+}
+
+.header__logo {
+  font-size: 2rem;
+  color: #fff;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+.header__nav {
+    margin-top: 10px;
+}
+
+.header__list {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    list-style: none;
+}
+
+.header__item a {
+    color: #fff;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.3s;
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+
+.header__item a:hover {
+    background-color: #ff99bb;
+}
+
+.main-visual {
+    background: url('02zakka-images/02zakka.jpg') no-repeat center center / cover;
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    text-align: center;
+    color: #fff;
+}
+
+.main-visual::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.3); /* 文字の視認性UP */
+    z-index: 0;
+}
+
+.main-visual__content {
+    position: relative;
+    z-index: 1;
+    padding: 0 20px;
+}
+
+.main-visual__title {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.main-visual__lead {
+    font-size: 1.2rem;
+}
+
+.items {
+    padding: 60px 20px;
+    background-color: #fffdf8;
+    text-align: center;
+}
+
+.items__title {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #e25c94;
+}
+
+.items__list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+}
+
+.items__card {
+    background-color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    width: 200px;
+    transition: transform 0.3s;
+    padding: 15px;
+}
+
+.items__card:hover {
+    transform: scale(1.05);
+}
+
+.items__image {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 10px;
+}
+
+.items__name {
+    font-size: 1rem;
+    color: #333;
+}
+
+.about {
+    background-color: #ffeef5;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.about__title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #d94c8a;
+}
+
+.about__text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #555;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.contact {
+    background-color: #fff0f5;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.contact__title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #e35b9a;
+}
+
+.contact__text {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.contact__link {
+    color: #e35b9a;
+    font-weight: bold;
+    text-decoration: none;
+    background-color: #fff;
+    padding: 8px 16px;
+    border-radius: 20px;
+    display: inline-block;
+    transition: background-color 0.3s;
+}
+
+.contact__link:hover {
+    background-color: #fdd7e8;
+}
+
+footer {
+    background-color: #fcd9e5;
+    text-align: center;
+    padding: 20px;
+}
+
+.footer__sns a {
+    color: #e1306c;
+    font-size: 1rem;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.footer__sns:hover {
+    text-decoration: underline;
+}
+
+.footer__sns i {
+    margin-right: 6px;
+}
+
+/* モーダルのスタイル */
+.modal {
+    visibility: hidden;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6);
+    /* --- モーダルフェード用CSS --- */
+    opacity: 0;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    pointer-events: none; /* 非表示中のクリック無効化 */
+}
+
+.modal__content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    width: 90%;
+    max-width: 400px;
+    border-radius: 12px;
+    text-align: center;
+    position: relative;
+}
+
+.modal__image {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.modal__desc {
+    margin-top: 10px;
+    font-size: 1rem;
+    color: #333;
+}
+
+.modal__close {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    font-size: 28px;
+    color: #999;
+    cursor: pointer;
+}
+
+.modal__close:hover {
+    color: #666;
+}
+
+.modal--active {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@media screen and (max-width: 768px) {
+    /* 商品カードのレスポンシブ対応 */
+    .items__list {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .items__card {
+        width: 90%;
+    }
+
+    /* ヘッダーナビのレスポンシブ対応 */
+    .header__list {
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    .header__item a {
+        display: inline-block;
+        padding: 6px 12px;
+        background-color: #ff99bb;
+        border-radius: 20px;
+        color: #fff;
+    }
+
+    .header__item a:hover {
+        background-color: #ff7799;
+    }
+
+    body {
+        font-size: 15px;
+    }
+
+    .main-visual__title {
+        font-size: 1.6rem;
+    }
+
+    .main-visual__lead {
+        font-size: 1rem;
+    }
+
+    .about__text,
+    .contact__text,
+    .items__name {
+        font-size: 0.95rem;
+    }
+
+    section {
+        padding: 40px 16px;
+    }
+
+    .items__card {
+        padding: 12px;
+    }
+
+    .contact__inner {
+        padding: 0 16px;
+        max-width: 100%;
+    }
+
+    .contact__title {
+        font-size: 1.5rem;
+    }
+
+    .contact__text {
+        font-size: 0.95rem;
+    }
+}

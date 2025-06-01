@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZakkaPOP</title>
+    <link rel="stylesheet" href="02zakka.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet">
+
+
+<!-- Google Fonts導入 -->
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header class="header">
+        <h1 class="header__logo">ZakkaPOP</h1>
+        <nav class="header__nav">
+            <ul class="header__list">
+                <li class="header__item"><a href="#">ホーム</a></li>
+                <li class="header__item"><a href="#items">商品一覧</a></li>
+                <li class="header__item"><a href="#about">お店について</a></li>
+                <li class="header__item"><a href="#contact">お問い合わせ</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section class="main-visual">
+        <div class="main-visual__content">
+            <h2 class="main-visual__title">毎日がちょっと楽しくなる雑貨を</h2>
+            <p class="main-visual__lead">カラフル・かわいい・ちょっぴりユニーク。</p>
+        </div>
+    </section>
+
+    <section id="items" class="items">
+        <div class="items__inner">
+            <h2 class="items__title">おすすめ雑貨</h2>
+            <div class="items__list">
+                <div class="items__card">
+                    <img src="02zakka-images/02zakka-item1.jpg" alt="ふんわりクッション" class="items__image" data-description="ふわふわな肌ざわりの癒し系クッション">
+                    <p class="items__name">ふんわりクッション</p>
+                </div>
+                <div class="items__card">
+                    <img src="02zakka-images/02zakka-item2.jpg" alt="手描きマグカップ" class="items__image" data-description="手描きでデザインされた、世界に１つだけのマグカップ">
+                    <p class="items__name">手描きマグカップ</p>
+                </div>
+                <div class="items__card">
+                    <img src="02zakka-images/02zakka-item3.jpg" alt="木製キーホルダー" class="items__image" data-description="木の温かみが優しいキーホルダー">
+                    <p class="items__name">木製キーホルダー</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="about__inner">
+            <h2 class="about__title">このお店について</h2>
+            <p class="about__text">
+                カラフルでかわいい雑貨に囲まれた、心温まる空間をお届けしています。<br>
+                ハンドメイドのぬくもりや、ユニークなデザインをお楽しみください。
+            </p>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="contact__inner">
+            <h2 class="contact__title">お問い合わせ</h2>
+            <p class="contact__text">商品のこと、お店のこと、なんでもお気軽にご連絡ください♪</p>
+            <p class="contact__text">
+                <a href="mailto:●●●@example.com" class="contact__link">●●●@example.com</a>
+            </p>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p class="footer__text">&copy; 2025 ZakkaPOP</p>
+        <p class="footer__sns">
+            <a href="https://instagram.com/youraccount" target="_blank">
+                <i class="fab fa-instagram"></i>instagram
+            </a>
+        </p>
+    </footer>
+
+    <div id="modal" class="modal">
+        <div class="modal__content">
+            <span id="modalClose" class="modal__close">&times;</span>
+            <img id="modalImg" class="modal__image" src="" alt="拡大画像" >
+            <h3 class="modal__title"></h3>
+            <p class="modal__desc" id="modalDesc"></p>
+        </div>
+    </div>
+
+    <script>
+        // モーダル要素の取得
+        const modal = document.getElementById('modal');
+        const modalImg = document.getElementById('modalImg');
+        const modalClose = document.getElementById('modalClose');
+        const modalDesc = document.getElementById('modalDesc');
+        const modalTitle = document.querySelector(".modal__title");
+
+        // 商品画像クリック時にモーダル表示
+        document.querySelectorAll(".items__image").forEach((img) => {
+            img.addEventListener("click", () => {
+                modalImg.src = img.src;
+                modalTitle.textContent = img.alt;
+                modalDesc.textContent = img.dataset.description;
+                modal.classList.add('modal--active'); 　// フェードイン
+            });
+        });
+
+        // 閉じるボタンでモーダルを非表示
+        modalClose.addEventListener('click', () => {
+            modal.classList.remove("modal--active");  // フェードアウト
+        });
+
+        // モーダル背景クリックで閉じる
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove("modal--active");  // フェードアウト
+            }
+        });
+    </script>
+
+</body>

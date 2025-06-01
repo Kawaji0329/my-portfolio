@@ -1,0 +1,212 @@
+/* 共通スタイル */
+body {
+    margin: 0;
+    font-family: "Hiragino Kaku Gothic ProN", sans-serif;
+    background-color: #fff;
+    color: #333;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ヘッダー */
+header {
+    background-color: #f5f5f5;
+    padding: 20px 0;
+}
+
+.site-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+    gap: 20px;
+}
+
+nav li {
+    font-size: 0.9rem;
+}
+
+/* メインビジュアル */
+.main-visual {
+    position: relative;
+    height: 60vh;
+    background-image: url("01cafe-images/01cafe.jpg");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+}
+
+.main-visual::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* 半透明の黒 */
+    z-index: 1;
+  }
+
+.main-visual h1 {
+    position: relative;
+    font-size: 2.5rem;
+    z-index: 2; /* オーバーレイより前に出す */
+    text-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+}
+
+/* 紹介文セクション */
+.about {
+    padding: 60px 20px;
+    background-color: #fafafa;
+    text-align: center;
+}
+
+.about h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #4c4c4c;
+}
+
+.about p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* ギャラリー風セクション */
+.gallery {
+    padding: 60px 20px;
+    background-color: #fff;
+}
+
+.gallery h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 40px;
+    color: #4c4c4c;
+}
+
+.gallery-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.gallery-item {
+    flex: 1 1 300px;
+    max-width: 300px;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* フッター */
+footer {
+    background-color: #f5f5f5;
+    text-align: center;
+    padding: 20px;
+    font-size: 0.8rem;
+    color: #777;
+}
+
+@media screen and(max-width: 768px){
+    .gallery {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .gallery img {
+        width: 100%;
+        height: auto;
+    }
+    
+    .about p {
+        font-size: 1rem;
+    }
+
+    footer {
+        padding: 30px 15px;
+        font-size: 0.9rem;
+    }
+
+    header {
+        padding: 10px;
+    }
+
+    header  h1 {
+        font-size: 1.5rem;
+    }
+
+    .main-visual {
+        height: 40vh;
+        padding: 20px;
+    }
+
+    .mein-visual h2 {
+        font-size: 1.5rem;
+        padding: 10px;
+    }
+
+    .about {
+        padding: 40px 15px;
+    }
+
+    .about h2 {
+        font-size: 1.5rem;
+    }
+
+    .about p {
+        font-size: 1rem;
+    }
+
+    .menu {
+        padding: 40px 15px;
+    }
+
+    .menu h2 {
+        font-size: 1.5rem;
+    }
+
+    .menu .item {
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+
+    footer {
+        font-size: 0.9rem;
+        padding: 15px;
+    }
+}
+
+body {
+    font-size: 16px; /* デフォルトの文字サイズを明示しておくと安心 */
+    line-height: 1.6;
+    padding-bottom: 60px; /* フッターが被らないように */
+  }
+
+
