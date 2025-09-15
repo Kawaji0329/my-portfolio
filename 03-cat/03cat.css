@@ -1,0 +1,611 @@
+* { box-sizing: border-box; }
+
+:root{
+  --bg:        #fff8f0;
+  --bg-soft:   #fffdf7;
+  --card:      #ffffff;
+
+  --text:      #463e3a;
+  --text-soft: #6d6460;
+
+  /* パステル寄りのブランドカラー群 */
+  --brand:     #f4a6c0;   /* 主色（ボタンなど） */
+  --brand-2:   #ffdfe9;   /* 背景アクセント */
+  --brand-3:   #ffe9f2;   /* バッジなど */
+  --brand-4:   #ff9ac0;   /* 枠色・強調 */
+
+  --ring:      #ffb7cf;   /* フォーカスリング */
+
+  /* 影をほんのり柔らかく */
+  --shadow:    0 6px 20px rgba(0,0,0,.06);
+  --shadow-lg: 0 10px 24px rgba(0,0,0,.10);
+
+  /* 丸みの基準値（追加） */
+  --radius:    16px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+
+  /* 遷移の基準（追加） */
+  --ease:      cubic-bezier(.22,.61,.36,1);
+  --dur:       .28s;
+}
+
+body {
+  margin: 0;
+  font-family: 'Zen Maru Gothic', sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  letter-spacing: .02em;
+}
+
+/* ===== Hero ===== */
+.hero {
+  background: url('03cat-images/03cat.jpg') no-repeat center center / cover;
+  height: auto;
+  min-height: 100vh; 
+  min-height: 100svh; /* モダン端末の推奨単位 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  border-bottom-left-radius: var(--radius-xl);
+  border-bottom-right-radius: var(--radius-xl);
+  overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  /* 黒幕を少し薄くして温かみを残す */
+  background: linear-gradient(to bottom, rgba(0,0,0,.25), rgba(0,0,0,.35));
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+  color: #fff;
+}
+
+.hero__title {
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  margin-bottom: 1rem;
+}
+
+.hero__lead {
+  font-size: clamp(1rem, 2.2vw, 1.25rem);
+  margin-bottom: 2rem;
+  opacity: .95;
+}
+
+.hero__btn {
+  display: inline-block;
+  padding: 12px 24px;
+  font-size: 1rem;
+  background-color: var(--brand);
+  color: #fff;
+  border: none;
+  text-decoration: none;
+  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease), background-color var(--dur);
+  border-radius: 999px;
+  box-shadow: var(--shadow);
+}
+
+.hero__btn:hover {
+  background-color: #e48aa9;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ===== Cards ===== */
+.cats__wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+  padding: 40px 20px;
+  background: var(--bg-soft);
+}
+
+/* 猫カード全体 */
+.cat-card {
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  width: 250px;
+  background: var(--card);
+  transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease), box-shadow .3s var(--ease);
+
+  /* ▼ アニメーションのための初期値 */
+  opacity: 1; transform: scale(1);
+  will-change: opacity, transform;
+}
+
+/* 猫画像 */
+.cat-card__image {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  height: auto;          /* 画像の縦を自動に */
+  object-fit: cover;
+}
+
+/* 情報部分 */
+.cat-card__info {
+  padding: 16px;
+}
+
+.cat-card__name {
+  font-size: clamp(1.05rem, 2.2vw, 1.2rem);
+  color: #2f2b28;
+  margin: 0 0 6px;
+  font-weight: 700;
+  font-family: 'Zen Maru Gothic', sans-serif;
+}
+
+.cat-card__feature {
+  font-size: 0.95rem;
+  color: var(--text-soft);
+  line-height: 1.6;
+}
+
+.cat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* フィルターUI */
+.filter {
+  background: var(--bg-soft);
+  padding: 28px 20px;
+  text-align: center;
+  border-bottom: 1px solid #f4ebe4;
+}
+
+.filter__title {
+  font-size: 1.1rem;
+  margin-bottom: 14px;
+  color: var(--text);
+}
+
+.filter__controls {
+  display: inline-flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.filter__select, .filter__button {
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid #ddd;
+  font-size: 0.95rem;
+  background: #fff;
+}
+
+.filter__button {
+  background: var(--brand-2);
+  border-color: #ffc7d9;
+  cursor: pointer;
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+/* ▼ フィルタでの状態遷移クラス
+   - is-enter: 表示開始時の初期状態（0→1へ遷移）
+   - is-enter-active: トランジション後の最終状態
+   - is-leaving: 非表示へ向かう途中（1→0へ遷移）
+   - is-hidden: レイアウトから外す（display:none） */
+.cat-card.is-enter { opacity: 0; transform: scale(.98); }
+.cat-card.is-enter.is-enter-active { opacity: 1; transform: scale(1); }
+.cat-card.is-leaving { opacity: 0; transform: scale(.98); }
+.cat-card.is-hidden { display: none; }
+
+/* ピル型ボタン */
+.filter-btn {
+  padding: .5rem .9rem;
+  border-radius: 999px;
+  border: 1px solid #eadfe0;
+  background: #fff;
+  cursor: pointer;
+  transition: background-color var(--dur), box-shadow var(--dur), transform var(--dur);
+  box-shadow: 0 1px 0 rgba(0,0,0,.02);
+}
+
+.filter-btn:hover {
+  background: #fffafc;
+  transform: translateY(-1px);
+}
+
+.filter-btn.is-active {
+  background: var(--brand-3);
+  border-color: var(--brand-4);
+  font-weight: 700;
+  box-shadow: 0 2px 0 rgba(255,154,192,.15);
+}
+
+.visually-hidden {
+  position: absolute!important;
+  width: 1px; height: 1px;
+  margin: -1px; border: 0; padding: 0;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  overflow: hidden;
+}
+
+/* ===== Filter ===== */
+.filter__result{
+  margin: 0 0 12px;
+  font-size: .95rem;
+  color: var(--text-soft);
+}
+
+/* フォーカス（キーボード操作）の見やすさ */
+.filter-btn:focus-visible, .filter__button:focus-visible, input:focus-visible, .hero__btn:focus-visible {
+  outline: 3px solid var(--ring); outline-offset: 2px;
+  border-color: var(--ring);
+}
+
+/* 入力 */
+.filters-group input[type="number"],
+.filters-group input[type="search"]{
+  padding: .55rem .75rem; border-radius: 10px; border: 1px solid #e5e5e5;
+  background: #fff; font-size: .95rem;
+}
+
+/* 件数バッジ */
+.count-badge {
+  display: inline-block;
+  padding: .25rem .6rem;
+  border-radius: 999px;
+  background: var(--brand-3);
+  border: 1px solid var(--brand-4);
+  font-weight: 700;
+  color: #333;
+  font-variant-numeric: tabular-nums; /* 数字が揃って見やすい */
+}
+
+/* 0件メッセージ */
+.empty {
+  text-align: center;
+  padding: 24px 16px 40px;
+  background: var(--bg-soft);
+}
+.empty[hidden] { display: none !important; }
+.empty__title {
+  margin: 0 0 8px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #333;
+}
+.empty__hint { margin: 0 0 16px; color: var(--text-soft); }
+.empty__button {
+  padding: .6rem 1rem;
+  border-radius: 999px;
+  border: 1px solid #ffc7d9;
+  background: var(--brand-2);
+  cursor: pointer;
+  font-weight: 700;
+}
+.empty__button:focus-visible { outline: 3px solid var(--ring); outline-offset: 2px; }
+
+/* a：派手すぎないリンク色＆下線なし、hoverでうっすら */
+a { color: inherit; text-decoration: none; }
+a:hover { opacity: .85; }
+
+/* セクション間の空気をふわっと */
+section { scroll-margin-top: 72px; }
+
+/* アニメーションをまろやかに */
+/* 全体の微アニメに統一カーブを適用（任意） */
+* { transition-timing-function: var(--ease); }
+/* ただし元から指定のある箇所が優先 */
+@media (prefers-reduced-motion: reduce){
+  .cat-card, .filter-btn, .hero__btn { transition: none !important; }
+}
+
+/* スマホ時の“詰まり”を解消（レスポンシブ微調整） */
+@media (max-width: 480px){
+  .filter__controls{ gap: 8px; }
+  .cat-card{ width: 100%; max-width: 420px; margin-inline: auto; }
+  .hero__title{ font-size: 1.8rem; }
+  .hero__lead{ font-size: 1rem; }
+}
+
+/* スマホ調整 */
+@media (max-width: 720px){
+  .footer__inner{
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 10px;
+  }
+  .footer__nav{ flex-wrap: wrap; justify-content: center; }
+}
+
+@media (max-width: 640px){
+  .filter__controls{
+    display: grid;              /* 横並び→縦並びに */
+    grid-template-columns: 1fr; /* 1カラム */
+    gap: 10px;
+    justify-items: stretch;
+  }
+  .filters-group{
+    display: grid;
+    grid-auto-flow: row;
+    gap: 8px;
+  }
+  .filters-group input,
+  .filter__button{
+    width: 100%;                /* 入力＆リセットを全幅に */
+  }
+  /* タッチしやすい高さへ */
+  .filter-btn, .filter__button, .filters-group input{
+    min-height: 44px;
+  }
+}
+
+.site-footer{
+  margin-top: 32px;
+  background: var(--bg-soft);
+  border-top: 1px solid #f4ebe4;
+  border-top-left-radius: var(--radius-xl);
+  border-top-right-radius: var(--radius-xl);
+  box-shadow: 0 -6px 20px rgba(0,0,0,.03) inset;
+}
+
+.footer__inner{
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 28px 20px;
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 16px;
+  align-items: center;
+}
+
+.footer__brand{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  color: #2f2b28;
+}
+.footer__logo{
+  display: inline-grid;
+  place-items: center;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--brand-3);
+  border: 1px solid var(--brand-4);
+  box-shadow: var(--shadow);
+}
+.footer__title{ letter-spacing: .02em; }
+
+.footer__nav{
+  display: inline-flex;
+  gap: 14px;
+}
+.footer__link{
+  padding: .4rem .7rem;
+  border-radius: 999px;
+  border: 1px solid #eadfe0;
+  background: #fff;
+  transition: background-color var(--dur), transform var(--dur);
+}
+.footer__link:hover{ background: #fffafc; transform: translateY(-1px); }
+
+.footer__sns{
+  display: inline-flex;
+  gap: 10px;
+}
+.sns-btn{
+  width: 36px; height: 36px;
+  display: inline-grid; place-items: center;
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid #eadfe0;
+  box-shadow: 0 1px 0 rgba(0,0,0,.04);
+  transition: transform var(--dur), box-shadow var(--dur), background-color var(--dur);
+  color: #444;
+}
+.sns-btn:hover{
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+  background: var(--brand-3);
+}
+
+.footer__copy{
+  text-align: center;
+  padding: 12px 16px 24px;
+  color: var(--text-soft);
+  font-size: .9rem;
+  border-top: 1px dashed #f1e7df;
+}
+
+/* --- タグ（バッジ） --- */
+.cat-card__tags{
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 0 0 8px;
+}
+
+.badge{
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: .25rem .55rem;
+  border-radius: 999px;
+  border: 1px solid #eadfe0;
+  background: #fff;
+  font-size: .8rem;
+  line-height: 1;
+  box-shadow: 0 1px 0 rgba(0,0,0,.04);
+}
+
+/* 性別バッジ（オス/メスで微妙に色を変える）*/
+.badge--gender[data-gender="オス"]{
+  background: #e7f1ff;
+  border-color: #cfe2ff;
+  color: #274c77;
+}
+.badge--gender[data-gender="メス"]{
+  background: var(--brand-3);
+  border-color: var(--brand-4);
+  color: #7a2f4b;
+}
+
+/* 毛色バッジ（スウォッチ付き）*/
+.badge--color{ background: #fffafc; }
+.badge__swatch{
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,0,0,.1);
+  background: var(--swatch, #ccc);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.5);
+}
+.badge__text{ letter-spacing: .01em; }
+
+/* ちょいHover */
+.badge:hover{ transform: translateY(-1px); transition: transform .2s; }
+
+/* ✅ 対応ブラウザならグリッドに切り替え */
+@supports (display: grid){
+  .cats__wrapper{
+    display: grid;
+    gap: clamp(16px, 2.5vw, 28px);
+    padding: clamp(24px, 4vw, 48px) clamp(12px, 3vw, 20px);
+    /* 画面幅に応じて 220–280px を最小幅に自動段組み */
+    grid-template-columns: repeat(auto-fit, minmax(clamp(220px, 30vw, 280px), 1fr));
+  }
+  /* グリッドでは固定幅を解除してセルいっぱいに */
+  .cat-card{ width: auto; }
+}
+
+/* ===== Modal ===== */
+.modal {
+  position: fixed; inset: 0; z-index: 9999;
+  display: grid; place-items: center;
+  background: rgba(0,0,0,.45);
+  opacity: 0; pointer-events: none;
+  transition: opacity .25s var(--ease);
+}
+.modal.is-open { opacity: 1; pointer-events: auto; }
+
+.modal__dialog{
+  width: min(92vw, 720px);
+  background: #fff;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  transform: translateY(12px) scale(.98);
+  transition: transform .25s var(--ease);
+}
+.modal.is-open .modal__dialog{ transform: translateY(0) scale(1); }
+
+.modal__img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; }
+.modal__body{ padding: 16px 18px 18px; }
+.modal__title{ margin: 0 0 8px; font-size: 1.25rem; color: #2f2b28; }
+.modal__text{ margin: 0; color: var(--text-soft); line-height: 1.7; }
+
+.modal__close{
+  position: absolute; top: 10px; right: 10px;
+  width: 36px; height: 36px; border-radius: 50%;
+  display: grid; place-items: center;
+  border: 1px solid #eadfe0; background: #fff; cursor: pointer;
+}
+.modal__close:focus-visible{ outline: 3px solid var(--ring); outline-offset: 2px; }
+
+/* ===== Back-to-Top button ===== */
+.to-top{
+  position: fixed; right: 16px; bottom: 16px; z-index: 9998;
+  width: 44px; height: 44px; border-radius: 50%;
+  display: grid; place-items: center;
+  border: 1px solid #eadfe0; background: #fff;
+  box-shadow: var(--shadow);
+  opacity: 0; transform: translateY(8px); pointer-events: none;
+  transition: opacity .25s var(--ease), transform .25s var(--ease);
+}
+.to-top.is-show{ opacity: 1; transform: translateY(0); pointer-events: auto; }
+.to-top:focus-visible{ outline: 3px solid var(--ring); outline-offset: 2px; }
+
+/* ===== Dark mode (auto) ===== */
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:        #1c1a1a;
+    --bg-soft:   #201e1e;
+    --card:      #262323;
+
+    --text:      #f3eeee;
+    --text-soft: #d0caca;
+
+    --brand:     #f09bb9;     /* 少しだけ鮮やかさUP */
+    --brand-2:   #3a2a31;     /* ダーク向け薄ピンクの面 */
+    --brand-3:   #3f2f36;     /* バッジ背景(暗) */
+    --brand-4:   #ff9ac0;     /* アクセントはそのまま */
+
+    --ring:      #ff8fb3;
+
+    --shadow:    0 8px 22px rgba(0,0,0,.35);
+    --shadow-lg: 0 12px 28px rgba(0,0,0,.5);
+  }
+
+  body{ background-color: var(--bg); color: var(--text); }
+
+  .hero::before{
+    background: linear-gradient(to bottom, rgba(0,0,0,.35), rgba(0,0,0,.55));
+  }
+
+  .filter{ border-bottom-color: #3a3737; }
+  .cats__wrapper{ background: var(--bg-soft); }
+  .cat-card{ background: var(--card); }
+  .cat-card__feature{ color: var(--text-soft); }
+
+  .filter-btn{ background:#2a2727; border-color:#3a3737; color: var(--text); }
+  .filter-btn:hover{ background:#2d2a2a; }
+  .filter-btn.is-active{
+    background: var(--brand-3);
+    border-color: var(--brand-4);
+    box-shadow: 0 2px 0 rgba(255,154,192,.18);
+  }
+
+  .filter__button{
+    background: var(--brand-2);
+    border-color: #8f5b6c;
+    color: var(--text);
+  }
+
+  .filters-group input[type="number"],
+  .filters-group input[type="search"]{
+    background:#2a2727; border-color:#3a3737; color: var(--text);
+  }
+
+  .count-badge{
+    background: var(--brand-3);
+    border-color: var(--brand-4);
+    color: var(--text);
+  }
+
+  .empty{ background: var(--bg-soft); }
+  .empty__title{ color: var(--text); }
+  .empty__hint{ color: var(--text-soft); }
+
+  .site-footer{ background: var(--bg-soft); border-top-color:#3a3737; }
+  .footer__link{ background:#2a2727; border-color:#3a3737; color: var(--text); }
+  .sns-btn{ background:#2a2727; border-color:#3a3737; color: var(--text); }
+  .sns-btn:hover{ background: var(--brand-3); }
+
+  .badge{ background:#2a2727; border-color:#3a3737; color: var(--text); }
+  .badge--gender[data-gender="オス"]{ background:#263447; border-color:#344a65; color:#dfe9f6; }
+  .badge--gender[data-gender="メス"]{ background: var(--brand-3); border-color: var(--brand-4); color:#ffd6e6; }
+
+  .modal{ background: rgba(0,0,0,.65); }
+  .modal__dialog{ background: var(--card); }
+  .modal__title{ color: var(--text); }
+  .modal__text{ color: var(--text-soft); }
+  .modal__close{ background:#2a2727; border-color:#3a3737; color: var(--text); }
+
+  .to-top{ background:#2a2727; border-color:#3a3737; color: var(--text); }
+}

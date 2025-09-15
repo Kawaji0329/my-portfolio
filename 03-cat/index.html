@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>癒しの猫ワールド</title>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="03cat.css">
+</head>
+
+<body>
+    <header>
+        
+    </header>
+    <main>
+        <section class="hero">
+            <div class="hero__content">
+                <h1 class="hero__title">ようこそ、癒しの猫ワールドへ</h1>
+                <p class="hero__lead">かわいい猫たちの日常をお届けします。</p>
+                <a href="#cats" class="hero__btn">猫たちを見る</a>
+            </div>
+        </section>
+
+        <section class="filter">
+            <h2 class="filter__title">絞り込み</h2>
+            <p id="resultCount" class="filter__result" role="status" aria-live="polite">
+                <span class="count-badge"><span id="resultNumber">5</span>匹</span>の猫がいます<span aria-hidden="true">🐱</span>
+            </p>
+            <div class="filter__controls">
+                <!-- 色フィルタ（ボタン群）-->
+                 <div class="filters-group" aria-label="毛色で選ぶ">
+                    <button class="filter-btn is-active" data-type="color" data-filter="all">すべて</button>
+                    <button class="filter-btn" data-type="color" data-filter="白">白</button>
+                    <button class="filter-btn" data-type="color" data-filter="黒">黒</button>
+                    <button class="filter-btn" data-type="color" data-filter="白黒">白黒</button>
+                    <button class="filter-btn" data-type="color" data-filter="茶">茶</button>
+                    <button class="filter-btn" data-type="color" data-filter="サビ">サビ</button>
+                 </div>
+
+                 <!-- 性別フィルタ（ボタン群）-->
+                <div class="filters-group" aria-label="性別で選ぶ">
+                    <button class="filter-btn is-active" data-type="gender" data-filter="all">すべて</button>
+                    <button class="filter-btn" data-type="gender" data-filter="オス">オス</button>
+                    <button class="filter-btn" data-type="gender" data-filter="メス">メス</button>
+                </div>
+
+                <!-- 年齢・キーワード・リセット -->
+                <div class="filters-group">
+                    <label for="ageMin">年齢:</label>
+                    <input id="ageMin" type="number" min="0" placeholder="最小" inputmode="numeric">
+                        ～
+                    <input id="ageMax" type="number" min="0" placeholder="最大" inputmode="numeric">
+                    
+                    <input id="keyword" type="search" placeholder="名前・特徴で検索" aria-label="名前や特徴で検索">
+                    <button id="resetFilters" class="filter__button" type="button">リセット</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="cats" aria-labelledby="catsTitle">
+            <h2 id="catsTitle" class="visually-hidden">猫の一覧</h2>
+            <div class="cats__wrapper">
+                <div class="cat-card" data-color="白" data-gender="メス" data-age="2">
+                    <img src="03cat-images/cat1.jpg" alt="ミルク（白猫・メス）" class="cat-card__image">
+                    <div class="cat-card__info">
+                        <h3 class="cat-card__name">ミルク</h3>
+                        <p class="cat-card__feature">好奇心旺盛で、ふわふわの白い毛並みがチャームポイント。</p>
+                    </div>
+                </div>
+                <div class="cat-card" data-color="黒" data-gender="オス" data-age="3">
+                    <img src="03cat-images/cat2.jpg" alt="スミ（黒猫・オス）" class="cat-card__image">
+                    <div class="cat-card__info">
+                        <h3 class="cat-card__name">スミ</h3>
+                        <p class="cat-card__feature">穏やかで優しい性格の男の子。他の猫ちゃんともすぐ仲良くなれます。</p>
+                    </div>
+                </div>
+                <div class="cat-card" data-color="白黒" data-gender="メス" data-age="1">
+                    <img src="03cat-images/cat3.jpg" alt="ハチ（白黒ハチワレ・メス）" class="cat-card__image">
+                    <div class="cat-card__info">
+                        <h3 class="cat-card__name">ハチ</h3>
+                        <p class="cat-card__feature">白黒ハチワレの女の子。活発で、おもちゃで遊ぶのが大好きです。</p>
+                    </div>
+                </div>
+                <div class="cat-card" data-color="茶" data-gender="オス" data-age="2">
+                    <img src="03cat-images/cat4.jpg" alt="トラ（茶トラ・オス）" class="cat-card__image">
+                    <div class="cat-card__info">
+                        <h3 class="cat-card__name">トラ</h3>
+                        <p class="cat-card__feature">人懐っこくて甘えん坊。人と過ごすことが好きなタイプです。</p>
+                    </div>
+                </div>
+                <div class="cat-card" data-color="サビ" data-gender="メス" data-age="2">
+                    <img src="03cat-images/cat5.jpg" alt="サビ（サビ・メス）" class="cat-card__image">
+                    <div class="cat-card__info">
+                        <h3 class="cat-card__name">サビ</h3>
+                        <p class="cat-card__feature">大人しくて慎重な性格。とても賢い女の子です。</p>
+                    </div>
+                </div>
+            </div>    
+        </section>
+
+        <div id="emptyState" class="empty" hidden>
+            <p class="empty__title">条件に合う猫が見つかりませんでした… <span aria-hidden="true">😿</span></p>
+            <p class="empty__hint">絞り込み条件を少しゆるめるか、リセットしてください。</p>
+            <button type="button" id="emptyReset" class="empty__button">リセットして全件表示</button>
+        </div>
+        
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer__inner">
+            <span class="footer__logo" aria-hidden="true">🐾</span>
+            <span class="footer__title">癒しの猫ワールド</span>
+        </div>
+        <nav class="footer__nav" aria-label="フッターナビゲーション">
+            <a href="#cats" class="footer__link">猫たち</a>
+            <a href="#top"  class="footer__link">トップへ</a>
+            <a href="mailto:hello@example.com" class="footer__link">お問い合わせ</a>
+        </nav>
+        <div class="footer__sns" aria-label="SNSリンク">
+            <a class="sns-btn" href="https://twitter.com/" target="_blank" rel="noopener noreferrer" aria-label="X（Twitter）">
+                <!-- X icon -->
+                <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+                    <path d="M18.9 2H21l-6.6 7.5L22 22h-6.8l-5.3-6.9L3.8 22H2l7.1-8.1L2 2h6.9l5 6.6L18.9 2Zm-2.4 18h3.3L8.2 4H4.9l11.6 16Z" fill="currentColor"/>
+                </svg>
+            </a>
+            <a class="sns-btn" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <!-- Instagram icon -->
+                <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+                    <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3.5A5.5 5.5 0 1 1 6.5 13 5.5 5.5 0 0 1 12 7.5Zm0 2A3.5 3.5 0 1 0 15.5 13 3.5 3.5 0 0 0 12 9.5Zm5.75-3a.75.75 0 1 1-.75.75.75.75 0 0 1 .75-.75Z" fill="currentColor"/>
+                </svg>
+            </a>
+            <a class="sns-btn" href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+                <!-- YouTube icon -->
+                <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+                    <path d="M22.5 7.1a3 3 0 0 0-2.1-2.1C18.8 4.5 12 4.5 12 4.5s-6.8 0-8.4.5A3 3 0 0 0 1.5 7.1 31.5 31.5 0 0 0 1 12a31.5 31.5 0 0 0 .5 4.9 3 3 0 0 0 2.1 2.1c1.6.5 8.4.5 8.4.5s6.8 0 8.4-.5a3 3 0 0 0 2.1-2.1A31.5 31.5 0 0 0 23 12a31.5 31.5 0 0 0-.5-4.9ZM10 15.5v-7l6 3.5-6 3.5Z" fill="currentColor"/>
+                </svg>
+            </a>
+        </div>
+        <div class="footer__copy">
+            <small>© <span id="year"></span> 癒しの猫ワールド</small>
+        </div>
+    </footer>
+    <script src="03cat.js"></script>
+</body>
+</html>
